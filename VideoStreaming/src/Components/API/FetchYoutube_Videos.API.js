@@ -2,7 +2,7 @@ export default async function fetchYoutubeVideos({ query , maxResults = 1000 , S
   try {
 
     const apiKey = "AIzaSyBiRRoliElqnYKitt8bL3ME9-uHedM8l28";
-    let dataUrl = `https://www.googleapis.com/youtube/v3/search?q=${query}&key=${apiKey}&maxResults=10`;
+    let dataUrl = `https://www.googleapis.com/youtube/v3/search?q=${query}&key=${apiKey}&maxResults=50`;
 
     const response = await fetch(dataUrl);
     let data = await response.json();
