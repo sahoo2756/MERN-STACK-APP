@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+      #box span {
+        position: absolute;
+        top : 200px;
+        left:300px;
+        border : 2px solid blue;   
+        padding: 10px;
+      }
+      #box {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* opacity: 0; */
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="box">
+
+      <span>this is ok</span>
+    </div>
+    <button id="btn">show box</button>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <script>
+      const btn = document.querySelector("#btn");
+      const box = document.querySelector("#box")
+
+      const t1 = gsap.timeline(); 
+     
+      btn.addEventListener("click" , ()=> {
+        t1.from("#box" , {
+          y : 100,
+        //   delay : 1,
+          duration : 1 ,
+          opacity : 0   
+      })
+      })
+    
+      
+
+ 
+
+    </script>
+  </body>
+</html>
