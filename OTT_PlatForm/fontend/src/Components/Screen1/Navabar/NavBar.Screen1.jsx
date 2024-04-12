@@ -4,7 +4,7 @@ import {
   navbarProfileBoxContext_Screen1,
   ProfileInfoBox,
   navbarSearchBoxContext_Screen1,
-  SystemLoggedInContext,
+  LoginUserContext,
 } from "../FileContainer.Screen1.js";
 import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"
@@ -20,7 +20,7 @@ export default function NavBar_Screen1() {
     setSystemLoggedIn,
     loggedInUserData,
     setLoggedInUserData,
-  } = useContext(SystemLoggedInContext);
+  } = useContext(LoginUserContext);
 
   useEffect(() => {
     if(isSystemLoggenIn) {
@@ -44,8 +44,11 @@ export default function NavBar_Screen1() {
   };
 
   const handleLogOut = () => {
+    // sessionStorage.removeItem("loggedUserData");
+    sessionStorage.clear()
     Cookies.remove('uid');
     setSystemLoggedIn(false);
+    setLoggedInUserData({source : "Navbar.Screen1.jsx handleLogOut()"})
     window.location.reload();
   }
 
@@ -68,7 +71,7 @@ export default function NavBar_Screen1() {
         <input
           type="text"
           className="w-full outline-none  bg-transparent  border-white/30   px-2 py-1 text-sm font-mono tracking-wide rounded-md"
-          placeholder="Search"
+          placeholder="Search Video"
           spellCheck={false}
           ref={inputRef}
         />
@@ -104,25 +107,4 @@ export default function NavBar_Screen1() {
   );
 }
 
-// <div className="w-full flex justify-between  items-center">
-// <div className="w-[100px] h-[35px] bg-green-500"></div>
-// <div className="flex gap-10 items-center">
-//   <div className="flex text-white">
-//     <input
-//       type="text"
-//       className="outline-none border-none bg-white/30  placeholder:text-white px-2 py-1 text-sm font-mono tracking-wide rounded-sm"
-//       placeholder="Enter Movie Name"
-//       spellCheck={false}
-//     />
-//     <button className="bg-white/30 border-l px-2">
-//       <GoSearch />
-//     </button>
-//   </div>
-//   <button
-//     onClick={() => setIsProfileInfo_BoxShow((prev) => !prev)}
-//     className="rounded-full px-3 py-2 bg-green-700"
-//   >
-//     M
-//   </button>
-// </div>
-// </div>
+

@@ -15,7 +15,7 @@ export default function Navbar_DisplayYoutubeData({setVideos}) {
         if (userQuery === null || userQuery === undefined || userQuery === "") {
           alert("Query Is Null");
         } else {
-          fetchVideos_API({query : userQuery ,  setVideos });
+          fetchVideos_API({videoName : userQuery ,  setVideos });
         }
     }
 

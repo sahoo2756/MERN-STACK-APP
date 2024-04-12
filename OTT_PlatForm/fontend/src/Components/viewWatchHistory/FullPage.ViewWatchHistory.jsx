@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
+import {LoginUserContext} from "./fileContainer.viewWatchHistory"
 
-export default function FullPage_ViewWatchHistory({ loggedInUserData }) {
-  console.log(loggedInUserData);
+export default function FullPage_ViewWatchHistory() {
+  const {loggedInUserData} = useContext(LoginUserContext)
   useEffect(() => {
-    // let email = loggedInUserData.email;
-    // console.log(email)
+    
     try {
       axios
         .get(`http://localhost:4000/users/api/validateToken?token=${token}` , {withCredentials : true})

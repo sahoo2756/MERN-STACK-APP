@@ -9,10 +9,11 @@ async function isUserExitInDB(req, res) {
   try {
     // Extract user data from req.query
     const { email, password } = req.query;
+    console.log('email , password ' , email ,  password)
 
     // Check for missing fields
     if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({status : 400,isSucess:false , message: "All fields are required" });
     }
 
     // const key = process.env.jwtSecretKey;
@@ -46,6 +47,8 @@ async function isUserExitInDB(req, res) {
     if (isPasswordTrue) {
       // 200 OK status code means that the request was successful
       let jwtSecretKey = process.env.jwtSecretKey;
+      console.log('jwtScretKey => ' ,jwtSecretKey)
+
       let token = jwt.sign(
         {
           _id: user.email,
@@ -58,18 +61,18 @@ async function isUserExitInDB(req, res) {
       res.cookie("uid", token);
       return res
         .status(200)
-        .json({ sucess: true, name : user.name , message: "User Sucessfully Login" });
+        .json({ status : 200 ,  isSucess: true, name : user.name , message: "User Sucessfully Login" });
     } else {
       // 401, often denoted as UNAUTHORIZED
       return res
         .status(401)
-        .json({ sucess: false, message: "Invalid Credentials" });
+        .json({ status : 401 , isSucess: false, message: "Invalid Credentials" });
     }
   } catch (error) {
     console.error(
       `Error at getUser user: ${error.message} [userController/getUser()]`
     );
-    res.status(500).json({ sucess: false, message: "Internal Server Error" });
+    res.status(500).json({status :500 ,  isSucess: false, message: "Internal Server Error" });
   }
 }
 

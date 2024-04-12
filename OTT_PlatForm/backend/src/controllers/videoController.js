@@ -2,19 +2,21 @@ import { createClient } from "pexels";
 
 async function getVideo(req, res) {
   try {
-    const query = req.query;
+    const {videoName} = req.query;
+    console.log(videoName)
 
-    if (!query) {
+    if (!videoName) {
       // 406 Not Acceptable
       res
         .status(406)
-        .json({ isSucess: false, message: "Required Query Feild" });
+        .json({ isSucess: false, message: "Required VideoName Feild" });
     }
 
     const API_KEY = process.env.PEXELS_API_KEY;
     const client = createClient(API_KEY);
+    let query = (videoName) ? videoName : "nature"
     client.videos
-      .search({ query , per_page: 50, orientation: "square", size: "small" })
+      .search({ query  , per_page: 50, orientation: "square", size: "small" })
       .then((videosContext) => {
         const allVideoLinks = videosContext.videos.map(
           (obj) => obj.video_files[0].link

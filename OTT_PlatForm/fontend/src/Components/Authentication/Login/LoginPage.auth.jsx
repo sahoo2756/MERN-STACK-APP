@@ -1,10 +1,9 @@
-import { useRef, useState  } from "react";
+import { useContext, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { isUserExitInDB } from "../FileContainer.Auth";
+import { isUserExitInDB, LoginUserContext } from "../FileContainer.Auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage_Auth({ prop }) {
   const inputEmailRef = useRef();
@@ -15,7 +14,7 @@ export default function LoginPage_Auth({ prop }) {
     setSystemLoggedIn,
     loggedInUserData,
     setLoggedInUserData,
-  } = prop;
+  } = useContext(LoginUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,16 +34,21 @@ export default function LoginPage_Auth({ prop }) {
     const sucessFullLogin = () => toast.success("Login SucessFully");
     const badLogin = () => toast.error("Sorry ! Invalid Credentials");
     if (res.isSucess) {
+      let stringObj = JSON.stringify({
+        email: res.email,
+        name: res.name,
+      });
+      sessionStorage.setItem("loggedUserData", stringObj);
       sucessFullLogin();
       setSystemLoggedIn(true);
       setLoggedInUserData({
         name: res.name,
-        email : res.email,
+        email: res.email,
         source: "LoginPage_Auth() if() block at Login.auth ",
       });
-      setTimeout(()=>{
-        navigate('/')
-      } ,2000)
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } else {
       badLogin();
       setSystemLoggedIn(false);

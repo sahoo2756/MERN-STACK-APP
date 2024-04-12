@@ -1,6 +1,6 @@
 import profileImg from "../../../assets/Profile.jpeg";
 import { useContext, useEffect, useRef, useState } from "react";
-import { navbarProfileBoxContext_Screen1 , SystemLoggedInContext } from "../FileContainer.Screen1";
+import { navbarProfileBoxContext_Screen1 , LoginUserContext } from "../FileContainer.Screen1";
 import gsap from "gsap";
 import { NavLink } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export default function ProfileInfoBox({loginUserFirstLetter , handleLogOut}) {
   const {
     isSystemLoggenIn,
     loggedInUserData,
-  } = useContext(SystemLoggedInContext);
+  } = useContext(LoginUserContext);
 
   useEffect(()=>{
     // console.log('hello')

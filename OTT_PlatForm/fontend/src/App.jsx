@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import {
   FullPage_Screen1,
   FullPage_Screen2,
   FullPage_Screen3,
   FullPage_Screen4,
-  SystemLoggedInContext,
+  LoginUserContext,
 } from "./Components/FileContainer.Components.js";
 
 import axios from "axios";
 import Cookies from "js-cookie";
 
-function App({ prop }) {
+function App() {
   // [algorithm for managing the systemUser]
   // const [isSystemLoggenIn , setSystemLoggedIn] = useState(false);
   // Intially state is false
@@ -32,7 +32,7 @@ function App({ prop }) {
     setSystemLoggedIn,
     loggedInUserData,
     setLoggedInUserData,
-  } = prop;
+  } = useContext(LoginUserContext);
 
   useEffect(() => {
     try {
@@ -42,10 +42,18 @@ function App({ prop }) {
         setSystemLoggedIn(false);
       } else {
         axios
-          .get(`http://localhost:4000/users/api/validateToken?token=${token}` , {withCredentials : true})
+          .get(`http://localhost:4000/users/api/validateToken?token=${token}`, {
+            withCredentials: true,
+          })
           .then((res) => {
             // res.data contain an object if token is true otherwise null
             if (res.data.isSucess) {
+              
+              let stringObj = JSON.stringify({
+                email: res.data.email,
+                name: res.data.name,
+              });
+              sessionStorage.setItem("loggedUserData", stringObj);
               setSystemLoggedIn(true);
               setLoggedInUserData({
                 name: res.data.name,
@@ -74,16 +82,7 @@ function App({ prop }) {
 
   return (
     <>
-      <SystemLoggedInContext.Provider
-        value={{
-          isSystemLoggenIn,
-          setSystemLoggedIn,
-          loggedInUserData,
-          setLoggedInUserData,
-        }}
-      >
-        <FullPage_Screen1 />
-      </SystemLoggedInContext.Provider>
+      <FullPage_Screen1 />
       <FullPage_Screen2 />
       <FullPage_Screen3 />
       <FullPage_Screen4 />

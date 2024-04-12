@@ -12,3 +12,6 @@ const  connectDB = async () => {
 export {
     connectDB
 }
+
+
+// 0.0.0.0/0

@@ -8,7 +8,7 @@ import ProfileInfoBox from "./Navabar/ProfileInfoBox.Navbar.Screen1.jsx";
 import navbarSearchBoxContext_Screen1 from "./Navabar/Context/Navbar.SearchBoxContext.Screen1.js";
 import Navbar_SearchBox_Screen1 from "./Navabar/Navbar.SearchBox.Screen1.jsx";
 
-import {SystemLoggedInContext} from "../FileContainer.Components.js"
+import {LoginUserContext} from "../FileContainer.Components.js"
 export {
     NavBar_Screen1,
     Screen1_bgImage,
@@ -19,5 +19,5 @@ export {
 
     navbarSearchBoxContext_Screen1,
     Navbar_SearchBox_Screen1,
-    SystemLoggedInContext
+    LoginUserContext
 }

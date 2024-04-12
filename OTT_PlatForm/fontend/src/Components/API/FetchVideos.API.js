@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export default async function fetchVideos_API({ query, setVideos }) {
+export default async function fetchVideos_API({ videoName, setVideos }) {
   
   try {
     const res = await axios.get(
-      `http://localhost:4000/api/videos?query=${query}`,
+      `http://localhost:4000/api/videos?videoName=${videoName}`,
       { withCredentials: true }
     );
     

@@ -1,12 +1,13 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { createNewUser_SignUp_Auth } from "../FileContainer.Auth.js";
+import {
+  createNewUser_SignUp_Auth,
+  LoginUserContext,
+} from "../FileContainer.Auth.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
-export default function SignUpPage_Auth({ prop }) {
+export default function SignUpPage_Auth() {
   const inputNameRef = useRef();
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
@@ -16,7 +17,7 @@ export default function SignUpPage_Auth({ prop }) {
     setSystemLoggedIn,
     loggedInUserData,
     setLoggedInUserData,
-  } = prop;
+  } = useContext(LoginUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,15 +36,24 @@ export default function SignUpPage_Auth({ prop }) {
 
     // response.isSucessFull conians a boolean value
     if (response.isSucessFull) {
+      let stringObj = JSON.stringify({
+        email,
+        name,
+      });
+      sessionStorage.setItem("loggedUserData", stringObj);
       sucessFullSignUp();
       setSystemLoggedIn(true);
-      setLoggedInUserData({name , email , source : "SignUpPage_Auth() at Sign_UP.Auth"})
+      setLoggedInUserData({
+        name,
+        email,
+        source: "SignUpPage_Auth() at Sign_UP.Auth",
+      });
       setTimeout(() => {
         navigate("/");
         setSystemLoggedIn(true);
       }, 5000);
     } else {
-      badSignUp(response.message)
+      badSignUp(response.message);
     }
   };
 
@@ -105,18 +115,18 @@ export default function SignUpPage_Auth({ prop }) {
         </NavLink>
       </div>
       <ToastContainer
-       autoClose={5000}
-       hideProgressBar={false}
-       richColors
-       theme="colored"
-       toastStyle={{
-        // backgroundColor: "black",
-        color: "white",
-        width: "auto",
-      }}
-      closeButtonStyle={{
-        color: "white", // Set close button text color to white
-      }}
+        autoClose={5000}
+        hideProgressBar={false}
+        richColors
+        theme="colored"
+        toastStyle={{
+          // backgroundColor: "black",
+          color: "white",
+          width: "auto",
+        }}
+        closeButtonStyle={{
+          color: "white", // Set close button text color to white
+        }}
       />
     </div>
   );

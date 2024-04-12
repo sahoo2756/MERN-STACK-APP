@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
-import { Navbar_DisplayYoutubeData } from "../FileContainer.DisplayYoutubeData.js";
+import { useContext, useEffect, useState } from "react";
+import { Navbar_DisplayYoutubeData , LoginUserContext} from "../FileContainer.DisplayYoutubeData.js";
 import { FaHome } from "react-icons/fa";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { fetchVideos_API } from "../FileContainer.DisplayYoutubeData.js";
 import axios from "axios";
 
-export default function FullPage_DisPlayYoutubeData({ loggedInUserData }) {
-  console.log(loggedInUserData)
+export default function FullPage_DisPlayYoutubeData() {
+  const {loggedInUserData}  = useContext(LoginUserContext)
+  console.log(`loggedInUserData => ` , loggedInUserData)
+
+
   function MovieCart({ videoURL }) {
     const storeUserWatchHistory = ({ videoURL }) => {
       
@@ -59,7 +62,7 @@ export default function FullPage_DisPlayYoutubeData({ loggedInUserData }) {
     if (userQuery === null || userQuery === undefined || userQuery === "") {
       alert("Query Is Null");
     } else {
-      fetchVideos_API({ query: userQuery, setVideos });
+      fetchVideos_API({ videoName : userQuery, setVideos });
     }
     
   }, []);
