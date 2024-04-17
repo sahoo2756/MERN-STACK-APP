@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import signUpUser_Auth from "../../backendFunction/signUpUserAuth.js";
-import LoginUserContext from "../../Context/loginUserContext.js"
+import LoginUserContext from "../../Context/loginUserContext.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,9 +11,7 @@ export default function SignUpPage() {
   const inputPasswordRef = useRef();
   const navigate = useNavigate();
   const {
-    isSystemLoggenIn ,
-    setSystemLoggedIn ,
-   loggedInUserData ,
+    setSystemLoggedIn,
     setLoggedInUserData
   } = useContext(LoginUserContext);
 
@@ -23,7 +21,7 @@ export default function SignUpPage() {
     let password = inputPasswordRef.current.value;
     let name = inputNameRef.current.value;
 
-    const sucessFullSignUp = () => toast.success("SignUp SucessFully");
+    const sucessFullSignUp = () => toast.success("SignUp Successfully");
     const badSignUp = (msg) => toast.error(msg);
 
     let response = await signUpUser_Auth({
@@ -32,7 +30,6 @@ export default function SignUpPage() {
       name,
     });
 
-    // response.isSucessFull conians a boolean value
     if (response.isSucessFull) {
       sucessFullSignUp();
       setSystemLoggedIn(true);
@@ -51,18 +48,18 @@ export default function SignUpPage() {
   };
 
   const inputTailwindProperty =
-    "bg-transparent border outline-none tracking-wide px-2 py-1 rounded-md w-[90%] lg:w-[400px]";
+    "bg-gray-200 border outline-none tracking-wide px-2 py-1 rounded-md w-[90%] lg:w-[400px]";
 
   const formTailwind =
     "border w-full lg:w-fit h-fit flex flex-col justify-center items-center py-5 lg:px-10 gap-y-5 rounded-lg mx-auto";
 
-  const loginBtnTailwind = "bg-blue";
+  const signUpBtnTailwind =
+    "bg-blue-700 hover:bg-blue-800 px-5 py-2 rounded-md text-white";
 
-  // Return the login form
   return (
-    <div className="w-full h-screen overflow-hidden  pt-10 justify-center bg-black text-white ">
+    <div className="w-full h-screen overflow-hidden  pt-10 justify-center bg-gray-100 text-gray-900 ">
       <form onSubmit={handleSubmit} className={` ${formTailwind} `}>
-        <h1 className="text-2xl ">Sign-Up</h1>
+        <h1 className="text-2xl font-bold">Sign-Up</h1>
         <input
           type="text"
           placeholder="Name"
@@ -89,21 +86,20 @@ export default function SignUpPage() {
         />
         <button
           type="submit"
-          className={`bg-blue-700 px-5 pt-1 pb-2 rounded-md ${loginBtnTailwind}`}
+          className={`${signUpBtnTailwind}`}
         >
           Sign Up
         </button>
         <p className="text-sm text-gray-400">
-          <span>If all-ready have any account </span>
-          <NavLink to="/login" className="text-green-300 font-thin">
+          <span>If already have an account </span>
+          <NavLink to="/login" className="text-green-500 font-semibold hover:text-green-600">
             Login
           </NavLink>
         </p>
       </form>
 
-      <div className="w-fit mt-10 mx-auto">
-        <NavLink className="text-green-700" to="/">
-          {" "}
+      <div className="mt-8 flex justify-center">
+        <NavLink className="text-green-700 border border-transparent py-2 px-4 rounded-md font-semibold hover:bg-gray-100 hover:border-gray-300" to="/">
           Go back To Home Page
         </NavLink>
       </div>
@@ -113,17 +109,17 @@ export default function SignUpPage() {
         richColors
         theme="colored"
         toastStyle={{
-          // backgroundColor: "black",
           color: "white",
           width: "auto",
         }}
         closeButtonStyle={{
-          color: "white", // Set close button text color to white
+          color: "white",
         }}
       />
     </div>
   );
 }
+
 
 // a0ad986a658ec1228cfa79d35b87538f
 

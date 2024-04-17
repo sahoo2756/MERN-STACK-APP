@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,17 +10,12 @@ export default function LoginPage({ prop }) {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const navigate = useNavigate();
-  const {
-    isSystemLoggenIn,
-    setSystemLoggedIn,
-    loggedInUserData,
-    setLoggedInUserData,
-  } = useContext(LoginUserContext);
+  const { setSystemLoggedIn, setLoggedInUserData } = useContext(LoginUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let email = inputEmailRef.current.value;
-    let password = inputPasswordRef.current.value;
+    const email = inputEmailRef.current.value;
+    const password = inputPasswordRef.current.value;
 
     const res = await loginUserAuth({
       email,
@@ -29,18 +24,13 @@ export default function LoginPage({ prop }) {
       setLoggedInUserData,
     });
 
-    // if boolValue true then show react.toastify("Sucessfull Logged In")
-    // if boolValue is false then react.toastify("Invalid Credentials")
-
-    const sucessFullLogin = () => toast.success("Login SucessFully");
-    const badLogin = () => toast.error("Sorry ! Invalid Credentials");
     if (res.isSucess) {
-      let stringObj = JSON.stringify({
+      const stringObj = JSON.stringify({
         email: res.email,
         name: res.name,
       });
       sessionStorage.setItem("loggedUserData", stringObj);
-      sucessFullLogin();
+      toast.success("Login Successfully");
       setSystemLoggedIn(true);
       setLoggedInUserData({
         name: res.name,
@@ -51,7 +41,7 @@ export default function LoginPage({ prop }) {
         navigate("/");
       }, 2000);
     } else {
-      badLogin();
+      toast.error("Sorry! Invalid Credentials");
       setSystemLoggedIn(false);
       setLoggedInUserData({
         source: "LoginPage_Auth() else() block at Login.auth ",
@@ -60,27 +50,24 @@ export default function LoginPage({ prop }) {
   };
 
   const inputTailwindProperty =
-    "bg-transparent border outline-none tracking-wide px-2 py-1 rounded-md w-full lg:w-[400px] placeholder:text-white/70";
+    "bg-gray-200 text-gray-800 border outline-none focus:border-indigo-500 tracking-wide px-3 py-2 rounded-md w-full lg:w-[400px] placeholder-gray-400";
 
   const formTailwind =
-    "border w-full lg:w-fit h-fit flex flex-col justify-center items-center p-3 lg:p-10 gap-y-5 mx-auto bg-gradient-to-r from-sky-500 to-indigo-500";
+    "border w-full lg:w-fit h-fit flex flex-col justify-center items-center p-6 lg:p-10 gap-y-6 mx-auto bg-white shadow-md rounded-md";
 
-  const loginBtnTailwind = "bg-blue";
+  const loginBtnTailwind =
+    "bg-indigo-500 hover:bg-indigo-600 px-5 py-2 rounded-md text-white";
 
-  // Return the login form
   return (
-    <div className="w-full h-screen overflow-hidden  pt-10 bg-gradient-to-r from-red-400 to-fuchsia-500 text-white px-3 lg:px-0">
-      <form
-        onSubmit={handleSubmit}
-        className={`bg-gradient-to-r from-sky-400 to-indigo-400  ${formTailwind} `}
-      >
-        <h1 className="text-2xl ">Login Here</h1>
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
+      <form onSubmit={handleSubmit} className={formTailwind}>
+        <h1 className="text-3xl font-bold mb-4">Login Here</h1>
         <input
           type="email"
           placeholder="Email"
           required
           ref={inputEmailRef}
-          className={` ${inputTailwindProperty}`}
+          className={inputTailwindProperty}
           spellCheck="false"
         />
         <input
@@ -88,25 +75,27 @@ export default function LoginPage({ prop }) {
           placeholder="Password"
           required
           ref={inputPasswordRef}
-          className={`${inputTailwindProperty}`}
+          className={inputTailwindProperty}
         />
-        <button
-          type="submit"
-          className={`bg-blue-700 px-5 pt-1 pb-2 rounded-md text-center ${loginBtnTailwind}`}
-          onClick={handleSubmit}
-        >
+        <button type="submit" className={loginBtnTailwind}>
           Login
         </button>
-        <p className="text-sm text-white">
-          <span>If don't have any account </span>
-          <NavLink to="/signUp" className="border-b  font-bold">
-            Sign-Up
+        <p className="text-sm mt-2">
+          Don't have an account?{" "}
+          <NavLink
+            to="/signUp"
+            className="font-bold text-indigo-500 hover:text-indigo-600"
+          >
+            Sign Up
           </NavLink>
         </p>
       </form>
 
-      <div className="w-fit mt-10 mx-auto">
-        <NavLink className="text-white border p-2 rounded-md" to="/">
+      <div className="mt-8">
+        <NavLink
+          className="text-indigo-500 border border-indigo-500 py-2 px-4 rounded-md hover:bg-indigo-500 hover:text-white"
+          to="/"
+        >
           Go back To Home Page
         </NavLink>
       </div>
@@ -116,15 +105,13 @@ export default function LoginPage({ prop }) {
         richColors
         theme="colored"
         toastStyle={{
-          // backgroundColor: "black",
           color: "white",
           width: "auto",
         }}
         closeButtonStyle={{
-          color: "white", // Set close button text color to white
+          color: "white",
         }}
       />
     </div>
   );
 }
-
