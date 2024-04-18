@@ -57,9 +57,9 @@ export default function SignUpPage() {
     "bg-blue-700 hover:bg-blue-800 px-5 py-2 rounded-md text-white";
 
   return (
-    <div className="w-full h-screen overflow-hidden  pt-10 justify-center bg-gray-100 text-gray-900 ">
-      <form onSubmit={handleSubmit} className={` ${formTailwind} `}>
-        <h1 className="text-2xl font-bold">Sign-Up</h1>
+    <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-900">
+      <form onSubmit={handleSubmit} className={` ${formTailwind} bg-white shadow-lg rounded-lg p-8 mb-8`}>
+        <h1 className="text-2xl font-bold mb-4">Sign-Up</h1>
         <input
           type="text"
           placeholder="Name"
@@ -90,7 +90,7 @@ export default function SignUpPage() {
         >
           Sign Up
         </button>
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-gray-400 mt-4">
           <span>If already have an account </span>
           <NavLink to="/login" className="text-green-500 font-semibold hover:text-green-600">
             Login
@@ -98,11 +98,13 @@ export default function SignUpPage() {
         </p>
       </form>
 
-      <div className="mt-8 flex justify-center">
-        <NavLink className="text-green-700 border border-transparent py-2 px-4 rounded-md font-semibold hover:bg-gray-100 hover:border-gray-300" to="/">
-          Go back To Home Page
-        </NavLink>
-      </div>
+  <div className="mt-8 flex justify-center">
+  <NavLink className="text-indigo-500 border border-indigo-500 py-2 px-4 rounded-md hover:bg-indigo-500 hover:text-white" to="/">
+    Go back To Home Page
+  </NavLink>
+</div>
+
+
       <ToastContainer
         autoClose={5000}
         hideProgressBar={false}
@@ -120,9 +122,3 @@ export default function SignUpPage() {
   );
 }
 
-
-// a0ad986a658ec1228cfa79d35b87538f
-
-// uuz!BbJA44$zHkd  -- maigun password
-
-// 8328811400  :- Manas Senapati
