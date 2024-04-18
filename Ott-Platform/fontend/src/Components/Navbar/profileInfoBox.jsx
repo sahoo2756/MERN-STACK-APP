@@ -2,21 +2,21 @@ import { useContext, useEffect, useRef, useState } from "react";
 import LoginUserContext from "../../Context/loginUserContext";
 import gsap from "gsap";
 import { NavLink } from "react-router-dom";
-import Cookies from "js-cookie";
+import handleLogOut from "../../Utility/handleLogOut";
 
-export default function ProfileInfoBox({ willProfileInfoShow, setProfileInfoShow }) {
-  const { isSystemLoggenIn, setSystemLoggedIn, loggedInUserData, setLoggedInUserData } = useContext(LoginUserContext);
+export default function ProfileInfoBox({
+  willProfileInfoShow,
+  setProfileInfoShow,
+}) {
+  const {
+    isSystemLoggenIn,
+    setSystemLoggedIn,
+    loggedInUserData,
+    setLoggedInUserData,
+  } = useContext(LoginUserContext);
   const [userName, setUserName] = useState("");
-  const [loginuserFirstNameLetter, setLoginuserFirstNameLetter] = useState('');
+  const [loginuserFirstNameLetter, setLoginuserFirstNameLetter] = useState("");
   const profileInfoMainContainerRef = useRef();
-  const [isAnimationInitialized, setAnimationInitialized] = useState(false);
-
-  const handleLogOut = () => {
-    Cookies.remove('uid');
-    setSystemLoggedIn(false);
-    setLoggedInUserData({ source: "ProfileInfoBox.jsx handleLogOut() at navbar folder" });
-    window.location.reload();
-  }
 
   useEffect(() => {
     if (isSystemLoggenIn) {
@@ -25,58 +25,59 @@ export default function ProfileInfoBox({ willProfileInfoShow, setProfileInfoShow
         setLoginuserFirstNameLetter(name[0].toUpperCase());
         setUserName(name);
       } else {
-        console.log('name is invalid ');
+        console.log("name is invalid ");
       }
     }
-  }, [loggedInUserData])
+  }, [loggedInUserData]);
 
   useEffect(() => {
-    setAnimationInitialized(true);
+    profileInfoMainContainerRef.current.className = " hidden ";
   }, []);
 
   useEffect(() => {
-    if (isAnimationInitialized && willProfileInfoShow) {
-      const animationTarget = profileInfoMainContainerRef.current;
+    const animationTarget = profileInfoMainContainerRef.current;
+    if (willProfileInfoShow === true) {
       gsap.to(animationTarget, {
-        x: 0,
+        x: 0, 
         opacity: 1,
         delay: 0.1,
         duration: 1.5,
         ease: "easeInOut",
       });
-    }
-  }, [willProfileInfoShow, isAnimationInitialized]);
-
-  useEffect(() => {
-    if (willProfileInfoShow === false) {
-      const animationTarget = profileInfoMainContainerRef.current;
+    } else {
       gsap.to(animationTarget, {
         x: 500,
         delay: 0.1,
         opacity: 0,
-        duration: 1.5,
-        ease: "easeInOut"
+        duration: 0.5,
+        ease: "easeInOut",
       });
     }
   }, [willProfileInfoShow]);
 
+
   return (
     <div
       ref={profileInfoMainContainerRef}
-      className={`w-full lg:w-[25%] z-10 h-[80%] fixed top-[8%] right-0 lg:right-[5%] rounded-md ${willProfileInfoShow ? "visible" : "hidden"
-        } bg-black text-white`}
+      className={`w-full lg:w-[25%] z-10 h-fit fixed top-[10%] right-0 lg:right-[5%] rounded-md ${
+        willProfileInfoShow && "visible"
+      } bg-black text-white`}
     >
       <div className="bg-white rounded-lg p-4">
         <button
-          onClick={() => setProfileInfoShow(prev => !prev)}
-          className="absolute top-2 right-2 text-gray-600 hover:text-red-500"
+          onClick={() => setProfileInfoShow((prev) => !prev)}
+          className="absolute top-2 right-5 text-white bg-red-500 hover:bg-red-600 px-2"
         >
           X
         </button>
 
         <div className="pt-8 pb-4 border-b-[1px]">
-          <span className="bg-purple-600 px-3 py-1 rounded-full">{loginuserFirstNameLetter}</span>
-          <span className="pl-3 text-lg font-semibold">{userName}</span>
+          <span className="bg-purple-600 px-3 py-1 rounded-full">
+            {loginuserFirstNameLetter}
+          </span>
+          <span className="pl-3 text-black text-lg font-semibold">
+            {userName}
+          </span>
         </div>
 
         <div className="pt-4 space-y-4">
@@ -88,7 +89,7 @@ export default function ProfileInfoBox({ willProfileInfoShow, setProfileInfoShow
           </NavLink>
 
           <button
-            onClick={handleLogOut}
+            onClick={()=> handleLogOut({setSystemLoggedIn , setLoggedInUserData})}
             className="w-full inline-block bg-black text-white border border-gray-500 px-4 py-2 rounded-lg hover:bg-gradient-to-r from-purple-500 to-blue-500"
           >
             Log-Out
@@ -100,7 +101,6 @@ export default function ProfileInfoBox({ willProfileInfoShow, setProfileInfoShow
           >
             View Your History
           </NavLink>
-
         </div>
       </div>
     </div>

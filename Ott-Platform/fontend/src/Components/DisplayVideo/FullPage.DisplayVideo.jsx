@@ -11,7 +11,7 @@ export default function FullPage_DisPlayYoutubeData() {
   const {loggedInUserData}  = useContext(LoginUserContext)
 
 
-  function MovieCart({ videoURL }) {
+  function MovieCart({ thumbnails , title , time }) {
     const storeUserWatchHistory = ({ videoURL }) => {
       
         try {
@@ -38,21 +38,22 @@ export default function FullPage_DisPlayYoutubeData() {
 
     return (
       <div
-        className="wfull lg:w-[30%] h-[400px] bg-white
-       p-1 rounded-md"
-        onClick={() => storeUserWatchHistory({ videoURL })}
+        className="w-full flex flex-col lg:w-[30%] h-[400px] shadow-2xl shadow-white/50
+       px-1 rounded-md"
       >
-        <video
-          src={videoURL}
-          alt=""
-          className="relative h-full w-full object-fill"
-          loop
-          controls
-          // muted
-        ></video>
+       
+       <img
+          src={thumbnails}
+          alt="image not found"
+          className="relative w-full"
+        ></img>
+      
+        <p className="text-gray-300 text-sm">{title}</p>
+        <p>{time}</p>
       </div>
     );
   }
+
   const [videos, setVideos] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,9 +84,9 @@ export default function FullPage_DisPlayYoutubeData() {
       <Navbar_DisplayVideo setVideos={setVideos} />
 
       <div className="flex flex-col lg:flex-row flex-wrap justify-between gap-y-10 lg:gap-10 lg:px-10">
-        {videos.map((url) => {
-          // console.log(url)
-          return <MovieCart key={Math.random()} videoURL={url} />;
+        {videos.map((obj) => {
+          // return <MovieCart key={Math.random()} videoURL={url} />;
+          return <MovieCart key={Math.random()} thumbnails={obj.thumbnails} title={obj.title} time={obj.time} />;
         })}
       </div>
     </div>

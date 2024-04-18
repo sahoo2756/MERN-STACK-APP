@@ -5,6 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import loginUserAuth from "../../backendFunction/loginUserAuth";
 import LoginUserContext from "../../Context/loginUserContext";
+import { MdDarkMode } from "react-icons/md";
+import { MdOutlineDarkMode } from "react-icons/md";
+
 
 export default function LoginPage({ prop }) {
   const inputEmailRef = useRef();
@@ -59,7 +62,8 @@ export default function LoginPage({ prop }) {
     "bg-indigo-500 hover:bg-indigo-600 px-5 py-2 rounded-md text-white";
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
+    // <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
+     <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
       <form onSubmit={handleSubmit} className={formTailwind}>
         <h1 className="text-3xl font-bold mb-4">Login Here</h1>
         <input

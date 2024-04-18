@@ -1,4 +1,4 @@
-import { useState, useContext , useEffect} from "react";
+import { useState, useContext, useEffect } from "react";
 import logo from "../../assets/logo.png";
 import { FaCartArrowDown } from "react-icons/fa";
 import { BsClockHistory } from "react-icons/bs";
@@ -7,26 +7,26 @@ import { NavLink } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
 import LoginUserContext from "../../Context/loginUserContext";
 import ProfileInfoBox from "./profileInfoBox";
+import DynamicNavbar from "./DynamicNavbar";
+import StaticNavbar from "./StaticNavbar";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [willProfileInfoShow, setProfileInfoShow] = useState(false);
   const { isSystemLoggenIn, loggedInUserData } = useContext(LoginUserContext);
 
-  const [loginuserFirstNameLetter , setLoginuserFirstNameLetter] = useState('')
+  const [loginuserFirstNameLetter, setLoginuserFirstNameLetter] = useState("");
 
-
-  useEffect(()=>{
-    if(isSystemLoggenIn) {
-     let name = loggedInUserData.name;
-     if(name) {
-       setLoginuserFirstNameLetter(name[0].toUpperCase())
-     } else {
-       console.log('name is invalid ')
-     }
+  useEffect(() => {
+    if (isSystemLoggenIn) {
+      let name = loggedInUserData.name;
+      if (name) {
+        setLoginuserFirstNameLetter(name[0].toUpperCase());
+      } else {
+        console.log("name is invalid ");
+      }
     }
- } , [loggedInUserData])
-
+  }, [loggedInUserData]);
 
   function formHandler(e) {
     e.preventDefault();
@@ -57,58 +57,28 @@ export default function Navbar() {
       </div>
 
       {/* Sidebar Menu for Mobile */}
-      
+
       <div>
         <div
           className={`${
             menuOpen ? "translate-x-0" : "-translate-x-full"
           } fixed lg:hidden top-0 left-0 w-[80%] h-full bg-gray-900 z-50 pt-16 transition-transform ease-in-out duration-[800ms]`}
         >
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col gap-y-5 items-center">
             <img src={logo} alt="" className="w-36 mb-6" />
 
-            <div className="text-white flex flex-col gap-y-5">
-              <ProfileInfoBox
-                willProfileInfoShow={willProfileInfoShow}
-                setProfileInfoShow={setProfileInfoShow}
-              />
-
+            <div className="text-white w-full px-8 flex flex-col-reverse gap-y-5">
               {isSystemLoggenIn ? (
-                <button
-                  onClick={() => setProfileInfoShow(!willProfileInfoShow)}
-                  className="text-white bg-gradient-to-r from-purple-500 to-blue-500 px-3 py-2 rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none"
-                >
-                  {loginuserFirstNameLetter}
-                </button>
-              ) : (
-                <RxAvatar
-                  onClick={() => {
-                    setSideProfileShow(!willSideProfileShow);
-                  }}
-                  className="text-white bg-gradient-to-r from-purple-500 to-blue-500  rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none cursor-pointer text-4xl"
+                <DynamicNavbar
+                  loginuserFirstNameLetter={loginuserFirstNameLetter}
                 />
+              ) : (
+                <StaticNavbar />
               )}
-
-              <NavLink to="/signup">
-                <button className={`${mobileBtnCss}`}>Sign Up</button>
-              </NavLink>
-
-              <NavLink to="/login">
-                <button className={`${mobileBtnCss}`}>Login</button>
-              </NavLink>
-
-              <button className={`${mobileBtnCss}`}>
-                <FaCartArrowDown className="inline mr-1" /> Cart
-              </button>
-
-              <button className={`${mobileBtnCss}`}>
-                <BsClockHistory className="inline mr-1" /> Watch List
-              </button>
             </div>
           </div>
         </div>
       </div>
-
 
       {/* Navbar for Large Screens */}
       <div className="hidden lg:fixed lg:top-0 lg:left-0 lg:z-10 lg:w-full lg:bg-gray-900 lg:text-white lg:shadow-2xl lg:flex lg:justify-between lg:items-center lg:px-3 lg:py-2">
@@ -122,41 +92,12 @@ export default function Navbar() {
         </div>
 
         <div id="right-side-contect" className="flex gap-x-5 items-center ">
-          <NavLink to="/signup">
-            <button className={`${btnCss}`}>Sign Up</button>
-          </NavLink>
-
-          <NavLink to="/login">
-            <button className={`${btnCss}`}>Login</button>
-          </NavLink>
-
-          <button className={`${btnCss}`}>
-            <FaCartArrowDown className="inline mr-1" /> Cart
-          </button>
-
-          <button className={`${btnCss}`}>
-            <BsClockHistory className="inline mr-1" /> Watch List
-          </button>
-
-          <ProfileInfoBox
-            willProfileInfoShow={willProfileInfoShow}
-            setProfileInfoShow={setProfileInfoShow}
-          />
-
           {isSystemLoggenIn ? (
-            <button
-              onClick={() => setProfileInfoShow(!willProfileInfoShow)}
-              className="text-white bg-gradient-to-r from-purple-500 to-blue-500 px-3 py-2 rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none"
-            >
-            {loginuserFirstNameLetter}
-            </button>
-          ) : (
-            <RxAvatar
-              onClick={() => {
-                setSideProfileShow(!willSideProfileShow);
-              }}
-              className="text-white bg-gradient-to-r from-purple-500 to-blue-500  rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none cursor-pointer text-4xl"
+            <DynamicNavbar
+              loginuserFirstNameLetter={loginuserFirstNameLetter}
             />
+          ) : (
+            <StaticNavbar />
           )}
         </div>
       </div>

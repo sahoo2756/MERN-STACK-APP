@@ -11,12 +11,24 @@ export default async function fetchVideos_API({ videoName, setVideos }) {
 
     if (res.data) {
       if (res.data.isSucess) {
-        setVideos(res.data.videoLinks)
+        setVideos(res.data.videosInfo);
+        
         return {
           isSucess: true,
-          videoURL : res.data.videoLinks,
+          videosInfo : res.data.videosInfo,
           statusCode: 200,
           message: "Videos Get Sucessfully",
+          /*
+          videosInfo is an array of Object
+            videosInfo = [
+              {
+                thumbnails: `url`,
+                title: 'string',
+                videoid: `url`,
+                time: integer-value,
+              } , {} , {} , {] , {} , {} , {}
+            ]
+          */
         };
       } else {
         return {
