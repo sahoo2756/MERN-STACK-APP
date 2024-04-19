@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import fetchVideos_API from "../../backendFunction/FetchVideo";
 
-export default function Navbar_DisplayVideo({setVideos}) {
+export default function Navbar_DisplayVideo({setVideos , setShowFullVideo}) {
 
     const inputRef = useRef();
 
@@ -15,6 +15,7 @@ export default function Navbar_DisplayVideo({setVideos}) {
         if (userQuery === null || userQuery === undefined || userQuery === "") {
           alert("Query Is Null");
         } else {
+          setShowFullVideo(false)
           fetchVideos_API({videoName : userQuery ,  setVideos });
         }
     }

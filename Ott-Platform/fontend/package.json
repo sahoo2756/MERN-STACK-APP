@@ -21,6 +21,7 @@
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
     "react-typed": "^2.0.12",
+    "simplebar": "^6.2.5",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {

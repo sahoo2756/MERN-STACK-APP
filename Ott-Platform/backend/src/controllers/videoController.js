@@ -72,8 +72,10 @@ async function getVideo(req, res) {
         .json({ isSucess: false, message: "Required VideoName Feild" });
     }
 
+    // 403 API_KEY -> The client does not have access rights to the content
     const API_KEY = process.env.YOUTUBE_API_KEY;
-    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${videoName}&maxResults=50&key=${API_KEY}`;
+    const url  = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${videoName}&maxResults=50&key=${API_KEY}&lang=hi`;
+    
 
     const countTimeBack = ({ utcTime }) => {
       const yearsAgo =
@@ -85,6 +87,7 @@ async function getVideo(req, res) {
 
     const allThumbnails = response.data.items.map(obj => obj.snippet.thumbnails.high.url);
     const allVideoTitle = response.data.items.map((obj) => obj.snippet.title);
+    const allChannelName = response.data.items.map(obj => obj.snippet.channelTitle);
     const allVideoid = response.data.items.map((obj) => obj.id.videoId);
     const allVideotime = response.data.items.map((obj) => {
       let utcTime = obj.snippet.publishedAt;
@@ -98,14 +101,12 @@ async function getVideo(req, res) {
       clientResponseArr.push({
         thumbnails: allThumbnails[i],
         title: allVideoTitle[i],
-        videoid: allVideoid[i],
+        channelName : allChannelName[i],
+        videoId: allVideoid[i],
         time: allVideotime[i],
       });
     }
 
-    let videoUrl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${allVideoid[0]}&key=${API_KEY}`;
-
-    const videoRes = await axios.get(videoUrl);
     
 
     res.status(200).json({
