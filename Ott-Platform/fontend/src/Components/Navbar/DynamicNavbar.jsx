@@ -15,12 +15,13 @@ export default function DynamicNavbar({loginuserFirstNameLetter}) {
       setLoggedInUserData,
     } = useContext(LoginUserContext);
 
-    const btnCss = `text-white bg-gradient-to-r from-purple-500 to-blue-500 px-4 py-2 rounded-lg hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none`;
+    const btnCss = `text-white bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-2 rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none`;
 
   return (
     <>
-      <NavLink to="/login">
-        <button className={`${btnCss} w-full lg:w-fit`}>Switch Account</button>
+    {/* navigate(`/play-videos?q=${inputRef.current.value}`) */}
+      <NavLink to={`/play-videos?q=south hindi movie`}>
+        <button className={`${btnCss} w-full lg:w-fit`}>Movies</button>
       </NavLink>
 
       <button className={`${btnCss}`}>
@@ -31,7 +32,7 @@ export default function DynamicNavbar({loginuserFirstNameLetter}) {
         <BsClockHistory className="inline mr-1" /> Watch List
       </button>
 
-      <button onClick={()=> handleLogOut({setSystemLoggedIn , setLoggedInUserData})} className={`${btnCss}`}>Log-out</button>
+      {/* <button onClick={()=> handleLogOut({setSystemLoggedIn , setLoggedInUserData})} className={`${btnCss}`}>Log-out</button> */}
 
       <ProfileInfoBox
         willProfileInfoShow={willProfileInfoShow}

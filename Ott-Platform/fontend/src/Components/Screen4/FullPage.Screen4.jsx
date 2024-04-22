@@ -35,8 +35,10 @@ export default function FullPage_Screen4() {
     image9,
     image10,
     image11,
-    image12,
-    image13,
+    image12 ,
+    image13 ,
+    image14 ,
+    image15
   } = movieBannerObj;
 
   return (
@@ -54,8 +56,8 @@ export default function FullPage_Screen4() {
       <Cart imageUrl={image11}  customStyle="hidden lg:visible"/>
       <Cart imageUrl={image12}  customStyle="hidden lg:visible"/>
       <Cart imageUrl={image13}  customStyle="hidden lg:visible"/>
-      <Cart imageUrl={image1}  customStyle="hidden lg:visible"/>
-      <Cart imageUrl={image2}  customStyle="hidden lg:visible"/>
+      <Cart imageUrl={image14}  customStyle="hidden lg:visible"/>
+      <Cart imageUrl={image15}  customStyle="hidden lg:visible"/>
     </div>
   );
 }

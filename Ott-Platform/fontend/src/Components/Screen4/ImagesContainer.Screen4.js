@@ -10,8 +10,11 @@ import image9 from "./9.jpg"
 import image10 from "./10.jpg"
 import image11 from "./11.jpg"
 import image12 from "./12.jpg"
+import image13 from "./13.jpg"
+import image14 from "./14.jpg"
+import image15 from "./15.jpg"
 
 
-const movieBannerObj = {image1 , image2 , image3 , image4 , image5 , image6 , image7 , image8 , image9 , image10 , image11 , image12 }
+const movieBannerObj = {image1 , image2 , image3 , image4 , image5 , image6 , image7 , image8 , image9 , image10 , image11 , image12 , image13 , image14 , image15 }
 
 export default movieBannerObj
