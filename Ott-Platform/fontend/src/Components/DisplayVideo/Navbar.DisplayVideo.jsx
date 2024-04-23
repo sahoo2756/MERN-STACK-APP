@@ -21,15 +21,15 @@ export default function Navbar_DisplayVideo({setVideos , setShowFullVideo}) {
     }
 
     return (
-        <form onSubmit={formHandler} className="flex border h-fit w-full lg:w-[50%] " >
+        <form onSubmit={formHandler} className="flex  h-fit w-full lg:w-[50%] bg-white rounded-full px-2 drop-shadow-2xl text-black" >
         <input
           type="text"
           ref={inputRef}
-          className="w-full outline-none  bg-transparent  border-white/30   px-2 py-1 text-sm font-mono tracking-wide rounded-md"
+          className="w-full outline-none  bg-transparent  border-white/30   px-2 py-1 text-lg font-sans tracking-wide rounded-md"
           placeholder="Search"
           spellCheck={false}
         />
-        <button onClick={formHandler} className="border border-l-0 bg-white/50 px-2">
+        <button onClick={formHandler} className=" text-blue-900 px-2">
           <FaSearch className="" />
         </button>
       </form>
