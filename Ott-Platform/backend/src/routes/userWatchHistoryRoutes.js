@@ -1,11 +1,11 @@
 import express from "express"
-import { pushWatchDetails , pushWatchDetails } from "../controllers/pushWatchURLController.js";
+import { pushWatchDetails , getWatchDetails } from "../controllers/pushWatchURLController.js";
 
 
 const userWatchHistoryRouter = express.Router()
 
 userWatchHistoryRouter.post('/', pushWatchDetails);
-userWatchHistoryRouter.get('/', pushWatchDetails);
+userWatchHistoryRouter.get('/', getWatchDetails);
 
 
 

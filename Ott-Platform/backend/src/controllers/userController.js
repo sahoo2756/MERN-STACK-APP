@@ -118,7 +118,10 @@ async function pushUser(req, res) {
 
     // Save the new user to the database
     await newUser.save();
-    createUserWatchHistory({email})
+
+    // createUserWatchHistory({email})
+    
+    
     // Send a successful response
     // res.status(201).json({ message: "User created successfully" });
     let jwtSecretKey = process.env.jwtSecretKey;

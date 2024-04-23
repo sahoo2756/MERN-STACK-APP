@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/database.js";
 import { userRouter } from "./routes/userRoutes.js";
 import { videoRouter } from "./routes/videoRoute.js";
-import { userWatchHistoryRouter } from "./routes/userWatchHistoryRoutes.js";
+// import { userWatchHistoryRouter } from "./routes/userWatchHistoryRoutes.js";
 import { makeUserSchema } from "./config/Schema/userSchema.js";
 import {makeUserWatchList_Schema} from "./config/Schema/userWatchedListSchema.js"
 import cookieParser from "cookie-parser";
@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRouter);
 app.use('/api/videos' , videoRouter)
-app.use('/api/watchHistory' , userWatchHistoryRouter)
+// app.use('/api/watchHistory' , userWatchHistoryRouter)
 
 
 
