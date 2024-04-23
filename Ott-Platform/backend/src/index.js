@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 
 app.use("/users", userRouter);
 app.use('/api/videos' , videoRouter)
-app.use('/api/storeWatchURL' , userWatchHistoryRouter)
+app.use('/api/watchHistory' , userWatchHistoryRouter)
 
 
 

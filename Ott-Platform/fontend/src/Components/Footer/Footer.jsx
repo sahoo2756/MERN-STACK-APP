@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from "../../assets/logo.png";
+import {NavLink , useNavigate} from "react-router-dom"
+import FooterContext from '../../Context/FooterContext';
+import titleObj from './titleObj';
 
-function Cart({ title }) {
+const storeFooterDetails = ({heading , title , navigate , setFooterContextDetails}) => {
+  
+  
+  setFooterContextDetails({heading , title});
+  navigate('/footerInfo')
+  
+}
+
+function Cart({ heading , title}) {
+  const { setFooterContextDetails } = useContext(FooterContext)
+  const navigate = useNavigate();
+
+
   return (
-    <span className='w-[44%] lg:w-[20%] text-sm text-start cursor-pointer  transition duration-700 ease-in-out hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:rounded-lg p-2 hover:text-white'>
-      {title}
-    </span>
+    <button onClick={()=> storeFooterDetails({heading , title , navigate , setFooterContextDetails})} className='w-[44%] lg:w-[20%] text-sm text-start cursor-pointer  transition duration-700 ease-in-out hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:rounded-lg p-2 hover:text-white'>
+      {heading}
+    </button>
   );
 }
 
@@ -19,22 +34,22 @@ export default function Footer() {
         </div>
 
         <div className='flex flex-wrap justify-between gap-y-5 gap-x-5 lg:gap-y-2 grid-rows-4 mb-10'>
-          <Cart title={"FAQ"} />
-          <Cart title={"Help Center"} />
-          <Cart title={"Account"} />
-          <Cart title={"Media Center"} />
-          <Cart title={"Investor Relations"} />
-          <Cart title={"Jobs"} />
-          <Cart title={"Way To Watch"} />
-          <Cart title={"Terms of Use"} />
-          <Cart title={"Privacy"} />
-          <Cart title={"Cookie Preferences"} />
-          <Cart title={"Corporate Information"} />
-          <Cart title={"Contact Us"} />
-          <Cart title={"Speed Test"} />
-          <Cart title={"Feedback"} />
-          <Cart title={"Legal Notices"} />
-          <Cart title={"Only On Stream Hub"} />
+          <Cart title={titleObj["FAQ"]} heading={"FAQ"}  />
+          <Cart title={titleObj["Help Centre"]} heading={"Help Center"} />
+          <Cart title={titleObj["Account"]} heading={"Account"} />
+          <Cart title={titleObj["Media Centre"]} heading={"Media Center"} />
+          <Cart title={titleObj["Investor Relations"]} heading={"Investor Relations"} />
+          <Cart title={titleObj["Jobs"]} heading={"Jobs"} />
+          <Cart title={titleObj["Ways to Watch"]} heading={"Way To Watch"} />
+          <Cart title={titleObj["Terms of Use"]} heading={"Terms of Use"} />
+          <Cart title={titleObj["User Responsibilities:"]} heading={"Privacy"} />
+          <Cart title={titleObj["Content Licensing Terms"]} heading={"Cookie Preferences"} />
+          <Cart title={titleObj["Copyright Policies"]} heading={"Corporate Information"} />
+          <Cart title={titleObj["Legal Disclaimers"]} heading={"Contact Us"} />
+          <Cart title={titleObj["Privacy"]} heading={"Speed Test"} />
+          <Cart title={titleObj["Contact Information"]} heading={"Feedback"} />
+          <Cart title={titleObj["Legal Notices"]} heading={"Legal Notices"} />
+          <Cart title={titleObj["Only on StreamHub"]} heading={"Only On Stream Hub"} />
         </div>
 
         <button className='mb-5 bg-blue-900 text-white text-md px-5 py-3 rounded-md hover:scale-[1.1] transition ease-in-out duration-700'>Watch Videos</button>
