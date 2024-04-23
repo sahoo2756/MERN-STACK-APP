@@ -42,6 +42,9 @@ export default function FullPage_Screen4() {
   } = movieBannerObj;
 
   return (
+    <div className="bg-black">
+      <h2 className="text-2xl text-white font-bold pl-10">Recommended Movies</h2>
+    
     <div className="bg-black px-4 lg:p-10 pt-20  flex flex-col lg:flex-row flex-wrap justify-between gap-x-10 gap-y-8">
       <Cart imageUrl={image1} />
       <Cart imageUrl={image2} />
@@ -58,6 +61,7 @@ export default function FullPage_Screen4() {
       <Cart imageUrl={image13}  customStyle="hidden lg:visible"/>
       <Cart imageUrl={image14}  customStyle="hidden lg:visible"/>
       <Cart imageUrl={image15}  customStyle="hidden lg:visible"/>
+    </div>
     </div>
   );
 }
