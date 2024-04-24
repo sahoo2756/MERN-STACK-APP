@@ -14,12 +14,12 @@ export default function FullPage_DisPlayYoutubeData() {
   const [videoId, setVideoId] = useState("");
   const [videoTitle, setVideoTitle] = useState("");
 
+  function handleThumbnailclick({videoId, title}) {
+    setShowFullVideo(true);
+    setVideoId(videoId);
+    setVideoTitle(title);
+  }
   function MovieCart({ thumbnails, title, channelName, time, videoId }) {
-    function handleThumbnailclick(videoId, title) {
-      setShowFullVideo(true);
-      setVideoId(videoId);
-      setVideoTitle(title);
-    }
 
     return (
       <div
@@ -32,7 +32,7 @@ export default function FullPage_DisPlayYoutubeData() {
             // src="https://images.pexels.com/photos/3238529/pexels-photo-3238529.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
             alt="image not found"
             className="relative rounded-lg h-full w-full"
-            onClick={() => handleThumbnailclick(videoId, title)}
+            onClick={() => handleThumbnailclick({videoId, title})}
           ></img>
         </div>
 
@@ -94,6 +94,7 @@ export default function FullPage_DisPlayYoutubeData() {
             videoId={videoId}
             videoTitle={videoTitle}
             videos={videos}
+            handleThumbnailclick={handleThumbnailclick}
           />
         ) : (
           <div className="flex flex-col lg:flex-row flex-wrap justify-between gap-y-10 lg:gap-10 lg:px-10">
