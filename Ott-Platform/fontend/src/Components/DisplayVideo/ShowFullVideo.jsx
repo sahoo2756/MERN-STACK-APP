@@ -2,9 +2,9 @@ import { BiCheck } from "react-icons/bi";
 
 function Cart({thumbnails , title, time, channelName , videoId , handleThumbnailclick }) {
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-x-5 h-32">
+    <div className="w-full flex flex-col lg:flex-row gap-x-5 h-32 ">
       <img
-        className="relative rounded-lg lg:w-[60%] h-full object-cover"
+        className="relative rounded-lg lg:w-[60%] h-full object-cover cursor-pointer hover:scale-[1.04]  transition duration-500 ease-in-out"
         src={thumbnails}
         alt="image not found"
         onClick={() => handleThumbnailclick({videoId, title})}

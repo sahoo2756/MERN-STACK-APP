@@ -26,12 +26,12 @@ export default function FullPage_DisPlayYoutubeData() {
         className="w-full flex flex-col gap-y-3 lg:w-[30%] h-[450px] shadow-2xl shadow-white/20
        px-1 rounded-md py-5"
       >
-        <div className="w-full h-[70%]">
+        <div className="w-full h-[70%] cursor-pointer  hover:scale-[1.04] transition duration-500 ease-in-out">
           <img
             src={thumbnails}
             // src="https://images.pexels.com/photos/3238529/pexels-photo-3238529.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
             alt="image not found"
-            className="relative rounded-lg h-full w-full"
+            className="relative rounded-lg h-full w-full "
             onClick={() => handleThumbnailclick({videoId, title})}
           ></img>
         </div>
