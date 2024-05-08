@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from "./App";
 import LoginPage from "./Components/Login/Login";
 import SignUpPage from "./Components/SignUp/SignUp";
+import CreatorPage from "./Components/Creator/CreatorPage";
 import FullPage_DisPlayYoutubeData from "./Components/DisplayVideo/FullPage.DisplayVideo";
 import FooterContext from "./Context/FooterContext";
 import {FooterInfo} from "./Components/Footer/FooterInfo"
@@ -30,6 +31,7 @@ export default function PreMain() {
             <Route path="/" element={<App />} />
             <Route path="/signUp" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/creatorpage" element={<CreatorPage />}/>
             <Route
               path="/play-videos"
               element={<FullPage_DisPlayYoutubeData />}

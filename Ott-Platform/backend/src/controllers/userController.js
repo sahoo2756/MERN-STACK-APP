@@ -16,21 +16,7 @@ async function isUserExitInDB(req, res) {
       return res.status(400).json({status : 400,isSucess:false , message: "All fields are required" });
     }
 
-    // const key = process.env.jwtSecretKey;
-    // jwt.verify(token, key, (err, decode) => {
-    //   if (err) {
-    //     console.log(`jwt verify error = > ${err.message} [getUser()]`);
-    //     // 401, often denoted as UNAUTHORIZED
-    //     res.status(401).json({ sucess: false, message: "Invalid Credentials" });
-    //   } else {
-    //     const decodeJSON = JSON.stringify(decode, null, 2);
-    //     console.log(`decode value is = ${decodeJSON}`);
-    //     // 200 OK status code means that the request was successful
-    //     res
-    //       .status(201)
-    //       .json({ sucess: true, message: "User Login Sucessfully" });
-    //   }
-    // });
+   
 
     // Find user by email
     const user = await userModel.findOne({ email });

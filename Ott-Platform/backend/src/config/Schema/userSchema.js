@@ -5,8 +5,7 @@ const { Schema } = mongoose;
 let userModel = null;
 const makeUserSchema = () => {
   try {
-    const userSchema = Schema(
-      {
+    const userSchema = Schema({
         name: {
           type: String,
           required: true,
@@ -28,7 +27,7 @@ const makeUserSchema = () => {
 
     return;
   } catch (error) {
-    console.log(`Error ${error.message} [userSchema , makeUserSchema()]`)
+    console.log(`Error ${error.message} [userSchema , makeUserSchema()]`);
   }
 };
 

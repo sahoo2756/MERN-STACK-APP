@@ -24,9 +24,9 @@ export default function DynamicNavbar({loginuserFirstNameLetter}) {
         <button className={`${btnCss} w-full lg:w-fit`}>Movies</button>
       </NavLink>
 
-      <button className={`${btnCss}`}>
-        <FaCartArrowDown className="inline mr-1" /> Cart
-      </button>
+      <NavLink to={"/creatorpage"} className={`${btnCss}`}>
+         Become A Creator
+      </NavLink>
 
       <button className={`${btnCss}`}>
         <BsClockHistory className="inline mr-1" /> Watch List

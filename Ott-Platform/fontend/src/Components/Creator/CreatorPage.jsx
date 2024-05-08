@@ -3,51 +3,39 @@ import { NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import loginUserAuth from "../../backendFunction/loginUserAuth";
-import LoginUserContext from "../../Context/loginUserContext";
-import { MdDarkMode } from "react-icons/md";
-import { MdOutlineDarkMode } from "react-icons/md";
+import newCreator_backendFun from "../../backendFunction/newCreator";
 
-
-export default function LoginPage({ prop }) {
+export default function CreatorPage({ prop }) {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
+  const inputNameRef = useRef();
   const navigate = useNavigate();
-  const { setSystemLoggedIn, setLoggedInUserData } = useContext(LoginUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = inputEmailRef.current.value;
     const password = inputPasswordRef.current.value;
+    const name = inputNameRef.current.value;
 
-    const res = await loginUserAuth({
+    const res = await newCreator_backendFun({
       email,
       password,
-      setSystemLoggedIn,
-      setLoggedInUserData,
+      name,
     });
 
-    if (res.isSucess) {
-      const stringObj = JSON.stringify({
-        email: res.email,
-        name: res.name,
-      });
-      toast.success("Login Successfully");
-      setSystemLoggedIn(true);
-      setLoggedInUserData({
-        name: res.name,
-        email: res.email,
-        source: "LoginPage_Auth() if() block at Login.auth ",
-      });
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+    console.log("res creatorPage = " , res)
+
+    if (res.isSuccess) {
+      toast.success("Account Created Successfully");
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 2000);
     } else {
-      toast.error("Sorry! Invalid Credentials");
-      setSystemLoggedIn(false);
-      setLoggedInUserData({
-        source: "LoginPage_Auth() else() block at Login.auth ",
-      });
+        if(res.statusCode === 417){
+            toast.error("User Allready Exit");
+        } else {
+            toast.error("Sorry! Invalid Credentials");
+        }
     }
   };
 
@@ -61,10 +49,17 @@ export default function LoginPage({ prop }) {
     "bg-indigo-500 hover:bg-indigo-600 px-5 py-2 rounded-md text-white";
 
   return (
-    // <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
-     <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100 text-gray-900">
       <form onSubmit={handleSubmit} className={formTailwind}>
-        <h1 className="text-3xl font-bold mb-4">Login Here</h1>
+        <h1 className="text-3xl font-bold mb-4">Become A Creator</h1>
+        <input
+          type="text"
+          placeholder="Name"
+          required
+          ref={inputNameRef}
+          className={inputTailwindProperty}
+          spellCheck="false"
+        />
         <input
           type="email"
           placeholder="Email"
@@ -81,17 +76,8 @@ export default function LoginPage({ prop }) {
           className={inputTailwindProperty}
         />
         <button type="submit" className={loginBtnTailwind}>
-          Login
+          Create Account
         </button>
-        <p className="text-sm mt-2">
-          Don't have an account?{" "}
-          <NavLink
-            to="/signUp"
-            className="font-bold text-indigo-500 hover:text-indigo-600"
-          >
-            Sign Up
-          </NavLink>
-        </p>
       </form>
 
       <div className="mt-8">
