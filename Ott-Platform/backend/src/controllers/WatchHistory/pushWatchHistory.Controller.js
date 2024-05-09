@@ -1,8 +1,48 @@
-import { userWatchedList_Model } from "../../config/Schema/userWatchedListSchema";
+import {userWatchList_Model} from "../../config/Schema/userWatchHistorySchema.js"
 
-export default async function pushWatchDetails(req , res){
+
+function validateHistoryData(data) {
+  try {
+    const badReqObj = {
+      isSuccess: false,
+      message: "",
+      statusCode: 400,
+    };
+
+    if (Boolean(data) === false) {
+      badReqObj.message = "Video Deatils Data Is Not Available For History";
+      throw badReqObj;
+    }
+
+    const { videoId , videoTitle , thumbnaisURl  } = data;
+
+    if (!Boolean(name)) {
+      badReqObj.message = "Name Feild Is Invalid";
+      throw badReqObj;
+    }
+    if (!Boolean(email)) {
+      badReqObj.message = "Email Feild Is Invalid";
+      throw badReqObj;
+    }
+    if (!Boolean(password)) {
+      badReqObj.message = "Password Feild Is Invalid";
+      throw badReqObj;
+    }
+
+    // if everything is correct
+    return { isSuccess: true };
+  } catch (errorObj) {
+    let obj = commonCatchHandler(errorObj);
+    return obj;
+  } // catch block end
+}
+
+
+export default async function pushWatchHistory(req , res){
     try {
-        const { email , videoId , videoTitle , videoThumbnails , watchedTime , channelName } = req.body.userData;
+      const data = req.body.data
+      let res = validateHistoryData(data)
+        const { email , videoId , videoTitle , videoThumbnails , watchedTime , channelName } = req.body.data;
     
         console.log("hello I am pushUserWatchList");
     

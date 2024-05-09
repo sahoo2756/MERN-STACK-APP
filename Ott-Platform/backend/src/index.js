@@ -5,7 +5,7 @@ import { connectDB } from "./config/database.js";
 import { userRouter } from "./routes/userRoutes.js";
 import { videoRouter } from "./routes/videoRoute.js";
 import { creatorRouter } from "./routes/creatorRouter.js";
-// import { userWatchHistoryRouter } from "./routes/userWatchHistoryRoutes.js";
+import { userWatchHistoryRouter } from "./routes/userWatchHistoryRoutes.js";
 import { makeUserSchema } from "./config/Schema/userSchema.js";
 import {makeUserWatchList_Schema} from "./config/Schema/userWatchedListSchema.js"
 import { makeCreatorSchema } from "./config/Schema/creatorSchema.js";
@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
 app.use("/users", userRouter);
 app.use('/api/videos' , videoRouter)
 app.use('/api/creator' , creatorRouter)
-// app.use('/api/watchHistory' , userWatchHistoryRouter)
+app.use('/api/history' , userWatchHistoryRouter)
 
 
 

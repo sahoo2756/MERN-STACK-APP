@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-let userWatchedList_Model = null;
+let userWatchList_Model = null;
 
 const makeUserWatchList_Schema = () => {
   try {
@@ -19,10 +19,22 @@ const makeUserWatchList_Schema = () => {
               type: Number,
               required: true,
             },
-            url: {
-              type: String,
-              required: true,
+            videoId : {
+              type : String , 
+              required : true
             },
+            videoTitle : {
+              type : String,
+              required : true,
+            },
+            thumnails : {
+              type : String, 
+              required : true, 
+            },
+            viewTime : {
+              type : String, 
+              required : true, 
+            }
           },
         ],
       },
@@ -32,7 +44,7 @@ const makeUserWatchList_Schema = () => {
       { email: 1, "watchHistory.index": 1 },
       { unique: true }
     );
-    userWatchedList_Model = mongoose.model(
+    userWatchList_Model = mongoose.model(
       "userWatchedList_Schema",
       userWatchedListSchema
     );
@@ -45,4 +57,4 @@ const makeUserWatchList_Schema = () => {
   }
 };
 
-export { makeUserWatchList_Schema, userWatchedList_Model };
+export { makeUserWatchList_Schema, userWatchList_Model };

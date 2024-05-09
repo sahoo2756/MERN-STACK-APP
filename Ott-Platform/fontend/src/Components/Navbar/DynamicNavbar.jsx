@@ -15,7 +15,7 @@ export default function DynamicNavbar({loginuserFirstNameLetter}) {
       setLoggedInUserData,
     } = useContext(LoginUserContext);
 
-    const btnCss = `text-white bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-2 rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none`;
+    const btnCss = `text-white text-center bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-2 rounded-full hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-400 transition duration-300 focus:outline-none`;
 
   return (
     <>
